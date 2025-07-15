@@ -42,6 +42,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (text.includes("sotto la media")) {
           colorClass = "bg-green-600";
+        } else if (text.includes("molto sotto la media")) {
+          colorClass = "bg-green-600";
         } else if (text.includes("molto sopra la media")) {
           colorClass = "bg-red-600";
         } else if (text.includes("sopra la media")) {
