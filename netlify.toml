@@ -1,6 +1,6 @@
+[build]
+  command = ""
+  publish = "."
+
 [functions]
   directory = "netlify/functions"
-
-[build]
-  command = "" # Nessun comando di build
-  publish = "." # Pubblica la root dove si trova index.html
