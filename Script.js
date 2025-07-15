@@ -37,7 +37,18 @@ document.addEventListener("DOMContentLoaded", () => {
       const data = await res.json();
 
       if (data.result) {
-        resultDiv.className = "mt-6 p-4 rounded text-white font-bold text-center bg-blue-600";
+        const text = data.result.toLowerCase();
+        let colorClass = "bg-blue-600"; // default: nella media
+
+        if (text.includes("sotto la media")) {
+          colorClass = "bg-green-600";
+        } else if (text.includes("molto sopra la media")) {
+          colorClass = "bg-red-600";
+        } else if (text.includes("sopra la media")) {
+          colorClass = "bg-yellow-600";
+        }
+
+        resultDiv.className = `mt-6 p-4 rounded text-white font-bold text-center ${colorClass}`;
         resultDiv.innerText = data.result;
         resultDiv.classList.remove("hidden");
       } else {
