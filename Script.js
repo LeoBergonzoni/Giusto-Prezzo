@@ -36,9 +36,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const data = await res.json();
 
-      if (data.response) {
+      if (data.result) {
         resultDiv.className = "mt-6 p-4 rounded text-white font-bold text-center bg-blue-600";
-        resultDiv.innerText = data.response;
+        resultDiv.innerText = data.result;
         resultDiv.classList.remove("hidden");
       } else {
         resultDiv.className = "mt-6 p-4 rounded text-white font-bold text-center bg-red-600";

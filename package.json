@@ -19,5 +19,8 @@
   "dependencies": {
     "openai": "^4.104.0"
   },
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "netlify-cli": "^22.2.2"
+  }
 }
