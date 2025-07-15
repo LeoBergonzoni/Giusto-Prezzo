@@ -1,7 +1,7 @@
 {
   "name": "prezzo-giusto",
   "version": "1.0.0",
-  "main": "Script.js",
+  "main": "script.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -16,8 +16,8 @@
     "url": "https://github.com/LeoBergonzoni/giusto-prezzo/issues"
   },
   "homepage": "https://github.com/LeoBergonzoni/giusto-prezzo#readme",
-  "description": "",
   "dependencies": {
-    "openai": "^5.9.0"
-  }
+    "openai": "^4.104.0"
+  },
+  "description": ""
 }

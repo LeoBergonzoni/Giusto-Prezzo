@@ -1,35 +1,34 @@
 const { Configuration, OpenAIApi } = require("openai");
 
-const configuration = new Configuration({
-  apiKey: process.env.OPENAI_API_KEY,
-});
-const openai = new OpenAIApi(configuration);
-
-exports.handler = async (event) => {
-  const { product, price, location } = JSON.parse(event.body);
-
-  const prompt = `Sto acquistando un/una \"${product}\" per €${price} a ${location}. 
-  Qual è il prezzo medio di mercato per questo prodotto in quella zona?
-  Rispondi con:
-  - stima del prezzo medio
-  - se sto spendendo meno della media, nella media, sopra la media o molto sopra la media.`;
-
+exports.handler = async function (event, context) {
   try {
-    const completion = await openai.createChatCompletion({
-      model: "gpt-3.5-turbo",
-      messages: [{ role: "user", content: prompt }],
+    const { product, price, location } = JSON.parse(event.body);
+
+    const configuration = new Configuration({
+      apiKey: process.env.OPENAI_API_KEY,
+    });
+    const openai = new OpenAIApi(configuration);
+
+    const prompt = `Un utente sta acquistando "${product}" per ${price}€ a "${location}". Sulla base del prezzo medio di mercato, valuta se è un buon prezzo, nella media o troppo alto. Rispondi in modo sintetico con: prezzo medio stimato in €, e livello ("sotto la media", "nella media", "sopra la media", "molto sopra la media").`;
+
+    const response = await openai.createCompletion({
+      model: "text-davinci-003",
+      prompt: prompt,
+      temperature: 0.7,
+      max_tokens: 100,
     });
 
-    const response = completion.data.choices[0].message.content;
+    const text = response.data.choices[0].text.trim();
 
     return {
       statusCode: 200,
-      body: JSON.stringify({ response }),
+      body: JSON.stringify({ result: text }),
     };
   } catch (error) {
+    console.error("Errore nella funzione checkPrice:", error);
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: error.message }),
+      body: JSON.stringify({ error: "Errore interno nella funzione" }),
     };
   }
 };
