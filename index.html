@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sto pagando il giusto prezzo?</title>
+  <script defer src="script.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(to bottom right, #1e3a8a, #0f172a);
+    }
+  </style>
+</head>
+<body class="text-white font-sans min-h-screen flex items-center justify-center">
+  <div class="max-w-xl w-full p-6 bg-white bg-opacity-10 backdrop-blur-md rounded shadow text-white">
+    <h1 class="text-3xl font-bold mb-4 text-center">💰 Sto pagando il giusto prezzo?</h1>
+    <p class="text-center mb-6 text-sm">Inserisci il prodotto che stai acquistando e dove ti trovi e ti faremo sapere se stai spendendo il giusto prezzo! 🛍️📍💶</p>
+    <form id="priceForm" class="space-y-4">
+      <div>
+        <label class="block font-medium">Cosa stai acquistando?</label>
+        <input type="text" id="product" class="w-full border border-white bg-transparent p-2 rounded text-white placeholder-white" placeholder="Es. iPhone 15" required>
+      </div>
+      <div>
+        <label class="block font-medium">Quanto lo stai pagando? (€)</label>
+        <input type="number" id="price" class="w-full border border-white bg-transparent p-2 rounded text-white placeholder-white" placeholder="Es. 899" required>
+      </div>
+      <div>
+        <label class="block font-medium">Dove ti trovi?</label>
+        <select id="location" class="w-full border border-white bg-transparent p-2 rounded text-white">
+          <option value="online">🛒 Sto acquistando Online</option>
+          <option value="geolocate">📍 Usa la mia posizione</option>
+          <option value="custom">✏️ Inserisco manualmente</option>
+        </select>
+        <input type="text" id="customLocation" class="w-full border border-white bg-transparent p-2 rounded mt-2 text-white placeholder-white hidden" placeholder="Es. Milano, Italia">
+      </div>
+      <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white w-full p-3 rounded font-semibold transition duration-200">Sto pagando il giusto prezzo? 🤔</button>
+    </form>
+
+    <div id="result" class="mt-6 hidden p-4 rounded text-white font-bold text-center"></div>
+  </div>
+</body>
+</html>

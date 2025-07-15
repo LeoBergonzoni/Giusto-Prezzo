@@ -1,0 +1,60 @@
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("priceForm");
+  const locationSelect = document.getElementById("location");
+  const customLocationInput = document.getElementById("customLocation");
+  const resultDiv = document.getElementById("result");
+
+  locationSelect.addEventListener("change", () => {
+    customLocationInput.classList.toggle("hidden", locationSelect.value !== "custom");
+  });
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const product = document.getElementById("product").value;
+    const price = parseFloat(document.getElementById("price").value);
+    let location = locationSelect.value;
+
+    if (location === "geolocate") {
+      try {
+        const position = await getGeolocation();
+        location = `lat: ${position.coords.latitude}, lon: ${position.coords.longitude}`;
+      } catch (err) {
+        alert("Geolocalizzazione non disponibile: " + err.message);
+        return;
+      }
+    } else if (location === "custom") {
+      location = customLocationInput.value || "non specificato";
+    }
+
+    try {
+      const res = await fetch("/.netlify/functions/checkPrice", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ product, price, location }),
+      });
+
+      const data = await res.json();
+
+      if (data.response) {
+        resultDiv.className = "mt-6 p-4 rounded text-white font-bold text-center bg-blue-600";
+        resultDiv.innerText = data.response;
+        resultDiv.classList.remove("hidden");
+      } else {
+        resultDiv.className = "mt-6 p-4 rounded text-white font-bold text-center bg-red-600";
+        resultDiv.innerText = "Errore nella risposta dell'intelligenza artificiale.";
+        resultDiv.classList.remove("hidden");
+      }
+    } catch (error) {
+      resultDiv.className = "mt-6 p-4 rounded text-white font-bold text-center bg-red-600";
+      resultDiv.innerText = "Errore nella richiesta: " + error.message;
+      resultDiv.classList.remove("hidden");
+    }
+  });
+
+  function getGeolocation() {
+    return new Promise((resolve, reject) => {
+      navigator.geolocation.getCurrentPosition(resolve, reject);
+    });
+  }
+});
