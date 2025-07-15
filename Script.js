@@ -12,7 +12,12 @@ document.addEventListener("DOMContentLoaded", () => {
     e.preventDefault();
 
     const product = document.getElementById("product").value;
-    const price = parseFloat(document.getElementById("price").value);
+    const rawPrice = document.getElementById("price").value.replace(',', '.');
+const price = parseFloat(rawPrice);
+if (isNaN(price)) {
+  alert("Inserisci un prezzo valido (es. 1,99 o 1,3)");
+  return;
+}
     let location = locationSelect.value;
 
     if (location === "geolocate") {
@@ -40,14 +45,14 @@ document.addEventListener("DOMContentLoaded", () => {
         const text = data.result.toLowerCase();
         let colorClass = "bg-blue-600"; // default: nella media
 
-        if (text.includes("sotto la media")) {
-          colorClass = "bg-green-600";
-        } else if (text.includes("molto sotto la media")) {
-          colorClass = "bg-green-600";
-        } else if (text.includes("molto sopra la media")) {
+        if (text.includes("molto sopra la media")) {
           colorClass = "bg-red-600";
         } else if (text.includes("sopra la media")) {
           colorClass = "bg-yellow-600";
+        } else if (text.includes("molto sotto la media")) {
+          colorClass = "bg-green-600";
+        } else if (text.includes("sotto la media")) {
+          colorClass = "bg-green-600";
         }
 
         resultDiv.className = `mt-6 p-4 rounded text-white font-bold text-center ${colorClass}`;
