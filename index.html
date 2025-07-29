@@ -27,35 +27,37 @@
       bottom: 16px;
       left: 50%;
       transform: translateX(-50%);
-      background: rgba(255, 255, 255, 0.1);
-      color: white;
-      padding: 1rem 1.5rem;
-      border-radius: 0.5rem;
-      font-size: 0.875rem;
+      background-color: rgba(255, 255, 255, 0.15);
       backdrop-filter: blur(6px);
-      z-index: 50;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.75rem;
-      align-items: center;
-      justify-content: center;
+      color: white;
+      padding: 0.75rem 1rem;
+      border-radius: 0.5rem;
+      font-size: 0.85rem;
+      display: none;
+      z-index: 100;
       max-width: 90vw;
       text-align: center;
-      text-wrap: balance;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     }
 
-    #cookie-banner button {
-      background-color: rgba(255, 255, 255, 0.2);
+    #cookie-banner.show {
+      display: block;
+    }
+
+    #cookie-ok {
+      display: inline-block;
+      margin-top: 0.5rem;
+      background-color: rgba(255, 255, 255, 0.25);
       border: none;
-      padding: 0.4rem 0.8rem;
-      border-radius: 0.25rem;
+      padding: 0.4rem 0.9rem;
+      border-radius: 0.3rem;
       color: white;
       font-size: 0.8rem;
       cursor: pointer;
-      transition: background 0.2s ease;
+      transition: background 0.3s ease;
     }
 
-    #cookie-banner button:hover {
+    #cookie-ok:hover {
       background-color: rgba(255, 255, 255, 0.4);
     }
 
@@ -101,24 +103,24 @@
   </footer>
 
   <!-- Cookie Banner -->
-  <div id="cookie-banner" class="hidden">
-    <span>Questo sito utilizza solo cookie tecnici per migliorare l’esperienza.</span>
+  <div id="cookie-banner">
+    <span>Questo sito utilizza solo cookie tecnici per migliorare l’esperienza.</span><br>
     <button id="cookie-ok">OK</button>
   </div>
 
-  <!-- Script posizionato alla fine per garantire corretto funzionamento -->
+  <!-- Script per gestione Cookie -->
   <script>
-    window.addEventListener("load", () => {
+    document.addEventListener("DOMContentLoaded", () => {
       const banner = document.getElementById("cookie-banner");
       const okBtn = document.getElementById("cookie-ok");
 
-      if (!localStorage.getItem("cookieBannerDismissed")) {
-        banner.classList.remove("hidden");
+      if (!localStorage.getItem("cookieAccepted")) {
+        banner.classList.add("show");
       }
 
       okBtn.addEventListener("click", () => {
-        banner.classList.add("hidden");
-        localStorage.setItem("cookieBannerDismissed", "true");
+        banner.classList.remove("show");
+        localStorage.setItem("cookieAccepted", "true");
       });
     });
   </script>
