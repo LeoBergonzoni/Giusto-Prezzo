@@ -6,13 +6,66 @@
   <title>Sto pagando il giusto prezzo?</title>
   <script defer src="script.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💶</text></svg>">
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y66TMZJXBX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-Y66TMZJXBX');
+  </script>
+
   <style>
     body {
       background: linear-gradient(to bottom right, #1e3a8a, #0f172a);
     }
+
+    #cookie-banner {
+      position: fixed;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      padding: 0.75rem 1rem;
+      border-radius: 0.5rem;
+      font-size: 0.875rem;
+      backdrop-filter: blur(6px);
+      z-index: 50;
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 90%;
+    }
+
+    #cookie-banner button {
+      background-color: rgba(255, 255, 255, 0.2);
+      border: none;
+      padding: 0.4rem 0.8rem;
+      border-radius: 0.25rem;
+      color: white;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    #cookie-banner button:hover {
+      background-color: rgba(255, 255, 255, 0.4);
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.75rem;
+      color: #cbd5e1;
+      margin-top: 2rem;
+    }
   </style>
 </head>
-<body class="text-white font-sans min-h-screen flex items-center justify-center">
+<body class="text-white font-sans min-h-screen flex flex-col items-center justify-center px-4">
+
   <div class="max-w-xl w-full p-6 bg-white bg-opacity-10 backdrop-blur-md rounded shadow text-white">
     <h1 class="text-3xl font-bold mb-4 text-center">💰 Sto pagando il giusto prezzo?</h1>
     <p class="text-center mb-6 text-sm">Inserisci il prodotto che stai acquistando e dove ti trovi e ti faremo sapere se stai spendendo il giusto prezzo! 🛍️📍💶</p>
@@ -39,5 +92,31 @@
 
     <div id="result" class="mt-6 hidden p-4 rounded text-white font-bold text-center"></div>
   </div>
+
+  <footer class="mt-6 text-sm text-white text-opacity-70">
+    &copy; 2025 Prezzo Giusto da Stru🧠Menti – Creato da Leonardo Bergonzoni con ❤️ e AI
+  </footer>
+
+  <!-- Cookie Banner con pulsante OK -->
+  <div id="cookie-banner" class="hidden">
+    <span>Questo sito utilizza solo cookie tecnici per migliorare l’esperienza.</span>
+    <button id="cookie-ok">OK</button>
+  </div>
+
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      const banner = document.getElementById("cookie-banner");
+      const okBtn = document.getElementById("cookie-ok");
+
+      if (!localStorage.getItem("cookieBannerDismissed")) {
+        banner.classList.remove("hidden");
+      }
+
+      okBtn.addEventListener("click", () => {
+        banner.classList.add("hidden");
+        localStorage.setItem("cookieBannerDismissed", "true");
+      });
+    });
+  </script>
 </body>
 </html>
