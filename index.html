@@ -97,26 +97,27 @@
     &copy; 2025 Prezzo Giusto da Stru🧠Menti – Creato da Leonardo Bergonzoni con ❤️ e AI
   </footer>
 
-  <!-- Cookie Banner con pulsante OK -->
+  <!-- Cookie Banner -->
   <div id="cookie-banner" class="hidden">
     <span>Questo sito utilizza solo cookie tecnici per migliorare l’esperienza.</span>
     <button id="cookie-ok">OK</button>
   </div>
 
-  <script>
-    window.addEventListener('DOMContentLoaded', () => {
-      const banner = document.getElementById("cookie-banner");
-      const okBtn = document.getElementById("cookie-ok");
-
-      if (!localStorage.getItem("cookieBannerDismissed")) {
-        banner.classList.remove("hidden");
-      }
-
-      okBtn.addEventListener("click", () => {
-        banner.classList.add("hidden");
-        localStorage.setItem("cookieBannerDismissed", "true");
-      });
-    });
-  </script>
 </body>
+<!-- Script posizionato DOPO </body> per compatibilità -->
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const banner = document.getElementById("cookie-banner");
+    const okBtn = document.getElementById("cookie-ok");
+
+    if (!localStorage.getItem("cookieBannerDismissed")) {
+      banner.classList.remove("hidden");
+    }
+
+    okBtn.addEventListener("click", () => {
+      banner.classList.add("hidden");
+      localStorage.setItem("cookieBannerDismissed", "true");
+    });
+  });
+</script>
 </html>
