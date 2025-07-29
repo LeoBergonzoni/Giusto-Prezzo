@@ -106,7 +106,7 @@
 </body>
 <!-- Script posizionato DOPO </body> per compatibilità -->
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
+  window.onload = function () {
     const banner = document.getElementById("cookie-banner");
     const okBtn = document.getElementById("cookie-ok");
 
@@ -118,6 +118,6 @@
       banner.classList.add("hidden");
       localStorage.setItem("cookieBannerDismissed", "true");
     });
-  });
+  };
 </script>
 </html>
