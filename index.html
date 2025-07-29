@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Sto pagando il giusto prezzo?</title>
   <script defer src="script.js"></script>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💶</text></svg>">
 
   <!-- Google Analytics -->
@@ -24,21 +24,24 @@
 
     #cookie-banner {
       position: fixed;
-      bottom: 10px;
+      bottom: 16px;
       left: 50%;
       transform: translateX(-50%);
       background: rgba(255, 255, 255, 0.1);
       color: white;
-      padding: 0.75rem 1rem;
+      padding: 1rem 1.5rem;
       border-radius: 0.5rem;
       font-size: 0.875rem;
       backdrop-filter: blur(6px);
       z-index: 50;
       display: flex;
-      gap: 1rem;
+      flex-wrap: wrap;
+      gap: 0.75rem;
       align-items: center;
-      justify-content: space-between;
-      max-width: 90%;
+      justify-content: center;
+      max-width: 90vw;
+      text-align: center;
+      text-wrap: balance;
     }
 
     #cookie-banner button {
@@ -103,21 +106,21 @@
     <button id="cookie-ok">OK</button>
   </div>
 
-</body>
-<!-- Script posizionato DOPO </body> per compatibilità -->
-<script>
-  window.onload = function () {
-    const banner = document.getElementById("cookie-banner");
-    const okBtn = document.getElementById("cookie-ok");
+  <!-- Script posizionato alla fine per garantire corretto funzionamento -->
+  <script>
+    window.addEventListener("load", () => {
+      const banner = document.getElementById("cookie-banner");
+      const okBtn = document.getElementById("cookie-ok");
 
-    if (!localStorage.getItem("cookieBannerDismissed")) {
-      banner.classList.remove("hidden");
-    }
+      if (!localStorage.getItem("cookieBannerDismissed")) {
+        banner.classList.remove("hidden");
+      }
 
-    okBtn.addEventListener("click", () => {
-      banner.classList.add("hidden");
-      localStorage.setItem("cookieBannerDismissed", "true");
+      okBtn.addEventListener("click", () => {
+        banner.classList.add("hidden");
+        localStorage.setItem("cookieBannerDismissed", "true");
+      });
     });
-  };
-</script>
+  </script>
+</body>
 </html>
